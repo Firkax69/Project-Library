@@ -7,6 +7,17 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+Book.prototype.toggleRead = function () {
+  this.read = !this.read  /* using ! to make a switch */
+} /* every instances of the BOOK will have access to this function */
+
+
+function toggleRead(index) {
+  myLibrary[index].toggleRead();
+  render();
+}
+
+
 function render() {
   let libraryEl = document.querySelector("#library");
   libraryEl.innerHTML = "";
@@ -23,6 +34,7 @@ function render() {
           <p>${book.pages} pages</p>
           <p class="read-status">${book.read ? "Read" : "Not read yet"}</p>
           <button class="remove-btn" onclick="removeBook(${i})">Remove</button>
+          <button class="toggle-read-btn" onclick="toggleRead(${i})">Toggle Read</button>
       </div>
     `;
     libraryEl.appendChild(bookEl);
